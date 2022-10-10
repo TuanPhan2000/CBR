@@ -26,4 +26,9 @@ public class QuestionServiceImpl implements QuestionService{
 		return questionRepo.findQuestionById(id);
 	}
 
+	@Override
+	public List<Question> findQuestionsByTrongSoAndHeThong(int trongSo, String heThong) {
+		return questionRepo.findQuestionsByTrongSoAndHeThong(trongSo, heThong);
+	}
+
 }

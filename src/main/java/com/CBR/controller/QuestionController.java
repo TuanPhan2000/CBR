@@ -30,6 +30,18 @@ public class QuestionController {
 		return new ResponseEntity<>(listQuestionByTrongSo, HttpStatus.OK);
 
 	}
+	@GetMapping("/findQuestionByTrongSoAndHeThong/{trongSo}/{heThong}")
+	public ResponseEntity<List<Question>> findQuestionByTrongSoAndHeThong(@PathVariable(name = "trongSo") int trongSo,
+																		  @PathVariable(name = "heThong") String heThong) {
+
+		List<Question> listQuestionByTrongSoAndHeThong = questionServiceImpl.findQuestionsByTrongSoAndHeThong(trongSo,
+				heThong);
+		if (listQuestionByTrongSoAndHeThong.isEmpty()) {
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		}
+		return new ResponseEntity<>(listQuestionByTrongSoAndHeThong, HttpStatus.OK);
+
+	}
 	
 
 	

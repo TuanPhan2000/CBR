@@ -8,4 +8,6 @@ public interface QuestionService {
 	
 	List<Question> findQuestionByTrongSo(int trongSo);
 	Question findQuestionById(int id);
+	List<Question> findQuestionsByTrongSoAndHeThong(int trongSo, String heThong);
+
 }
