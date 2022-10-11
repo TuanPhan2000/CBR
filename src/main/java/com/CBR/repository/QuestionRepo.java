@@ -21,4 +21,5 @@ public interface QuestionRepo extends JpaRepository<Question, Integer>{
 			"JOIN ketluan ON motacase.idcase = ketluan.id " +
 			"WHERE trongso = ?1 AND ketluan.hethong = ?2 ", nativeQuery = true)
 	List<Question> findQuestionsByTrongSoAndHeThong(int trongSo, String heThong);
+
 }

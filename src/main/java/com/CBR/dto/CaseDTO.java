@@ -17,6 +17,5 @@ public abstract class CaseDTO {
     private String ansTenXe;
     private String ansDoiXe;
     private String ansLoiGapPhai;
-    private String ansHeThong;
 
 }

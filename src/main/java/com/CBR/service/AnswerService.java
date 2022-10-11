@@ -7,4 +7,5 @@ public interface AnswerService {
 
     List<Answer> findAnswersByQuestion(int idQuestion);
 
+    String findHeThongByCauTraLoi(String answer);
 }

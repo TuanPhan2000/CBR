@@ -17,4 +17,9 @@ public class AnswerServiceImpl implements AnswerService {
     public List<Answer> findAnswersByQuestion(int idQuestion) {
         return answerRepo.findAnswersByQuestion_Id(idQuestion);
     }
+
+    @Override
+    public String findHeThongByCauTraLoi(String answer) {
+        return answerRepo.findHeThongByCauTraLoi(answer);
+    }
 }
