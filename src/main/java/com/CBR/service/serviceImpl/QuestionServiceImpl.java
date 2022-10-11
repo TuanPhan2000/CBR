@@ -10,14 +10,13 @@ import com.CBR.repository.QuestionRepo;
 import com.CBR.service.QuestionService;
 
 @Service
-public class QuestionServiceImpl implements QuestionService{
-	
+public class QuestionServiceImpl implements QuestionService {
+
 	@Autowired
 	QuestionRepo questionRepo;
 
 	@Override
 	public List<Question> findQuestionByTrongSo(int trongSo) {
-		// TODO Auto-generated method stub
 		return questionRepo.findQuestionsByTrongSo(trongSo);
 	}
 
