@@ -1,16 +1,29 @@
 package com.CBR.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
+@Getter
+@Setter
 public class ChuyenDongForm extends Form{
 
     private String oToKhiDiDuongThang;
     private String khungXeKhiQuaDuongNhapNho;
     private String tinhTrangLop;
 
+
+    public ChuyenDongForm(String hangXe, String tenXe, String doiXe, String loiGapPhai, String heThong, String oToKhiDiDuongThang, String khungXeKhiQuaDuongNhapNho, String tinhTrangLop) {
+        super(hangXe, tenXe, doiXe, loiGapPhai, heThong);
+        this.oToKhiDiDuongThang = oToKhiDiDuongThang;
+        this.khungXeKhiQuaDuongNhapNho = khungXeKhiQuaDuongNhapNho;
+        this.tinhTrangLop = tinhTrangLop;
+    }
+
+    @Override
+    public String toString() {
+        return "ChuyenDongForm{" + super.toString() +
+                "oToKhiDiDuongThang='" + oToKhiDiDuongThang + '\'' +
+                ", khungXeKhiQuaDuongNhapNho='" + khungXeKhiQuaDuongNhapNho + '\'' +
+                ", tinhTrangLop='" + tinhTrangLop + '\'' +
+                '}';
+    }
 }

@@ -19,4 +19,19 @@ public interface AnswerRepo extends JpaRepository<Answer, Integer>{
 			"JOIN ketluan ON ketluan.id = motacase.idcase " +
 			"WHERE cautraloi = ?1", nativeQuery = true)
 	String findHeThongByCauTraLoi(String answer);
+
+	@Query(value = "SELECT cautraloi.cautraloi " +
+			"FROM cauhoi " +
+			"JOIN cautraloi ON cauhoi.id = cautraloi.idcauhoi " +
+			"JOIN motacase ON cautraloi.id = motacase.idcautraloi " +
+			"JOIN ketluan ON motacase.idcase = ketluan.id " +
+			"WHERE ketluan.hethong = ?1", nativeQuery = true)
+	List<String> getListAnswerInCaseByHeThong(String heThong);
+
+	@Query(value = "SELECT cauhoi.trongso " +
+			"FROM cauhoi " +
+			"JOIN cautraloi ON cauhoi.id = cautraloi.idcauhoi " +
+			"WHERE cautraloi = ?1", nativeQuery = true)
+	int getTrongSoByAnswer(String ans);
+
 }

@@ -22,4 +22,14 @@ public class AnswerServiceImpl implements AnswerService {
     public String findHeThongByCauTraLoi(String answer) {
         return answerRepo.findHeThongByCauTraLoi(answer);
     }
+
+    @Override
+    public List<String> getListAnswerInCaseByHeThong(String heThong) {
+        return answerRepo.getListAnswerInCaseByHeThong(heThong);
+    }
+
+    @Override
+    public int getTrongSoByAnswer(String ans) {
+        return answerRepo.getTrongSoByAnswer(ans);
+    }
 }

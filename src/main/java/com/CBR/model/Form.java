@@ -1,24 +1,34 @@
 package com.CBR.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
+@Getter
+@Setter
 public class Form {
-//    SELECT ketluan.id, ketluan.nguyenhan, ketluan.suachua, ketluan.hethong, cautraloi.cautraloi
-//    FROM cauhoi
-//    JOIN cautraloi ON cauhoi.id = cautraloi.idcauhoi
-//    JOIN motacase ON cautraloi.id = motacase.idcautraloi
-//    JOIN ketluan ON motacase.idcase = ketluan.id
-//    WHERE ketluan.hethong = "Phanh"
 
     private String hangXe;
     private String tenXe;
     private String doiXe;
     private String loiGapPhai;
     private String heThong;
+    public Form() {
+    }
 
+    public Form(String hangXe, String tenXe, String doiXe, String loiGapPhai, String heThong) {
+        this.hangXe = hangXe;
+        this.tenXe = tenXe;
+        this.doiXe = doiXe;
+        this.loiGapPhai = loiGapPhai;
+        this.heThong = heThong;
+    }
+
+    @Override
+    public String toString() {
+        return "hangXe='" + hangXe + '\'' +
+                ", tenXe='" + tenXe + '\'' +
+                ", doiXe='" + doiXe + '\'' +
+                ", loiGapPhai='" + loiGapPhai + '\'' +
+                ", heThong='" + heThong + '\'' +
+                '}';
+    }
 }

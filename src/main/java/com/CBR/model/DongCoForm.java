@@ -1,12 +1,10 @@
 package com.CBR.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
+@Getter
+@Setter
+@ToString
 public class DongCoForm extends Form{
 
     private String tuoiThoAcquy;
