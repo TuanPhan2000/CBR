@@ -11,4 +11,5 @@ public interface AnswerService {
 
     List<String> getListAnswerInCaseByHeThong(String heThong);
     int getTrongSoByAnswer(String ans);
+    List<Answer> findAnswerByTrongSo(int trongSo);
 }

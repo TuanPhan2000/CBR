@@ -32,4 +32,9 @@ public class AnswerServiceImpl implements AnswerService {
     public int getTrongSoByAnswer(String ans) {
         return answerRepo.getTrongSoByAnswer(ans);
     }
+
+    @Override
+    public List<Answer> findAnswerByTrongSo(int trongSo) {
+        return answerRepo.findAnswerByTrongSo(trongSo);
+    }
 }

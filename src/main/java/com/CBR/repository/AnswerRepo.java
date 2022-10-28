@@ -33,5 +33,10 @@ public interface AnswerRepo extends JpaRepository<Answer, Integer>{
 			"JOIN cautraloi ON cauhoi.id = cautraloi.idcauhoi " +
 			"WHERE cautraloi = ?1", nativeQuery = true)
 	int getTrongSoByAnswer(String ans);
+	@Query(value = "SELECT cautraloi.* " +
+			"FROM cautraloi " +
+			"JOIN cauhoi ON cauhoi.id = cautraloi.idcauhoi " +
+			"WHERE cauhoi.trongso = ?1 ", nativeQuery = true)
+	List<Answer> findAnswerByTrongSo(int trongSo);
 
 }

@@ -28,5 +28,14 @@ public class AnswerController {
         }
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
+    @GetMapping("/findAnswerByTrongSo/{trongSo}")
+    public ResponseEntity<List<Answer>> findAnswerByTrongSo(@PathVariable(name = "trongSo") int trongSo){
+
+        List<Answer> list = answerServiceImpl.findAnswerByTrongSo(trongSo);
+        if(list.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(list, HttpStatus.OK);
+    }
 
 }
