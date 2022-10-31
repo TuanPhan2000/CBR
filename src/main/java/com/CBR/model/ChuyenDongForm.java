@@ -11,8 +11,8 @@ public class ChuyenDongForm extends Form{
     private String tinhTrangLop;
 
 
-    public ChuyenDongForm(String hangXe, String tenXe, String doiXe, String loiGapPhai, String heThong, String oToKhiDiDuongThang, String khungXeKhiQuaDuongNhapNho, String tinhTrangLop) {
-        super(hangXe, tenXe, doiXe, loiGapPhai, heThong);
+    public ChuyenDongForm(String hangXe, String tenXe, String doiXe, String loiGapPhai, String oToKhiDiDuongThang, String khungXeKhiQuaDuongNhapNho, String tinhTrangLop) {
+        super(hangXe, tenXe, doiXe, loiGapPhai);
         this.oToKhiDiDuongThang = oToKhiDiDuongThang;
         this.khungXeKhiQuaDuongNhapNho = khungXeKhiQuaDuongNhapNho;
         this.tinhTrangLop = tinhTrangLop;

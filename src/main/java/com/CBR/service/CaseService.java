@@ -13,4 +13,6 @@ public interface CaseService {
     List<Form> getAllCaseTruyenLuc();
     List<PhanhForm> getAllCasePhanh();
 
+    void setAttributeCaseInputGeneral(String hangXe, String tenXe, String doiXe, String loiGapPhai);
+
 }

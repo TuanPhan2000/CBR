@@ -11,45 +11,42 @@
 <body>
 <div id="checkOut">
     <h1>Hệ thống tư vấn lỗi ô tô</h1>
-    <form>
+    <form th:action="@{/submitGeneralInfor}" th:method="post">
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="hangXe">Hãng xe</label>
-                <input type="text" class="form-control" id="hangXe" placeholder="Hãng xe">
+                <input type="text" class="form-control" id="hangXe" placeholder="Hãng xe" th:name="hangXe">
             </div>
             <div class="form-group col-md-6">
                 <label for="tenXe">Tên xe</label>
-                <input type="password" class="form-control" id="tenXe" placeholder="Tên xe">
+                <input type="password" class="form-control" id="tenXe" placeholder="Tên xe" th:name="tenXe">
             </div>
         </div>
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="doiXe">Đời xe</label>
-                <input type="password" class="form-control" id="doiXe" placeholder="Đời xe">
+                <input type="password" class="form-control" id="doiXe" placeholder="Đời xe" th:name="doiXe">
             </div>
             <div class="form-group col-md-6">
                 <label for="loiGapPhai">Lỗi gặp phải</label>
-                <select id="loiGapPhai" class="form-control" onchange="">
+                <select id="loiGapPhai" class="form-control" onchange="" th:name="loiGapPhai">
                     <option selected>Lỗi gặp phải</option>
-                    <option th:each="answer : ${answers}" th:value="${answer.id}"
+                    <option th:each="answer : ${answers}" th:value="${answer.cauTraLoi}"
                             th:text="${answer.cauTraLoi}"></option>
                 </select>
             </div>
-            <!--            <div class="form-group col-md-4">-->
-            <!--                <label for="endDate">Year</label>-->
-            <!--                <select id="endDate" class="form-control">-->
-            <!--                    <option selected>2018</option>-->
-            <!--                    <option>2019</option>-->
-            <!--                    <option>2020</option>-->
-            <!--                    <option>2021</option>-->
-            <!--                    <option>2022</option>-->
-            <!--                </select>-->
-            <!--            </div>-->
-
-            <!--            <div class="form-group col-md-4">-->
-            <!--                <label for="cVV">CVV</label>-->
-            <!--                <input type="text" class="form-control" id="cVV" placeholder="123">-->
-            <!--            </div>-->
+        </div>
+        <div class="form-row" >
+            <div class="form-group col-md-4">
+                <label for="endDate">Year</label>
+                <select id="endDate" class="form-control">
+                    <option selected>2018</option>
+                    <option>2019</option>
+                    <option>2020</option>
+                    <option>2021</option>
+                    <option>2022</option>
+                </select>
+            </div>
         </div>
 
         <button class="btn btn-primary">submit</button>

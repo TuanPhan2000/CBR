@@ -1,6 +1,7 @@
 package com.CBR.service.serviceImpl;
 
 import com.CBR.model.ChuyenDongForm;
+import com.CBR.model.Form;
 import com.CBR.model.Solution;
 import com.CBR.service.SolutionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,6 @@ import java.util.List;
 
 @Service
 public class SolutionServiceImpl implements SolutionService {
-
     @Autowired
     CaseServiceImpl caseServiceImpl;
     @Autowired
@@ -50,4 +50,5 @@ public class SolutionServiceImpl implements SolutionService {
         }
         return null;
     }
+
 }
