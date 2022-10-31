@@ -11,6 +11,7 @@ import com.CBR.enity.Answer;
 @Repository
 public interface AnswerRepo extends JpaRepository<Answer, Integer>{
 
+	Answer findAnswerByCauTraLoi(String answer);
 	List<Answer> findAnswersByQuestion_Id(int  idQuestion);
 
 	@Query(value = "SELECT DISTINCT ketluan.hethong \n" +

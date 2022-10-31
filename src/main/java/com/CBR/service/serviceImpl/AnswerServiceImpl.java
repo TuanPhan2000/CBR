@@ -20,6 +20,11 @@ public class AnswerServiceImpl implements AnswerService {
     QuestionServiceImpl questionServiceImpl;
 
     @Override
+    public Answer findAnswerByCauTraLoi(String answer) {
+        return answerRepo.findAnswerByCauTraLoi(answer);
+    }
+
+    @Override
     public List<Answer> findAnswersByQuestion(int idQuestion) {
         return answerRepo.findAnswersByQuestion_Id(idQuestion);
     }

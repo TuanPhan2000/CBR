@@ -11,8 +11,8 @@
 <body>
 <div id="checkOut">
     <h1>Hệ thống tư vấn lỗi ô tô</h1>
-    <form th:action="@{/submitGeneralInfor}" th:method="post">
-        <div class="form-row">
+    <form th:if="${answers != null}" th:action="@{/submitGeneralInfor}" th:method="post">
+        <div class="form-row" th:if="${answers != null}">
             <div class="form-group col-md-6">
                 <label for="hangXe">Hãng xe</label>
                 <input type="text" class="form-control" id="hangXe" placeholder="Hãng xe" th:name="hangXe">
@@ -22,7 +22,7 @@
                 <input type="password" class="form-control" id="tenXe" placeholder="Tên xe" th:name="tenXe">
             </div>
         </div>
-        <div class="form-row">
+        <div class="form-row" th:if="${answers != null}">
             <div class="form-group col-md-6">
                 <label for="doiXe">Đời xe</label>
                 <input type="password" class="form-control" id="doiXe" placeholder="Đời xe" th:name="doiXe">
@@ -36,20 +36,20 @@
                 </select>
             </div>
         </div>
-        <div class="form-row" >
-            <div class="form-group col-md-4">
-                <label for="endDate">Year</label>
-                <select id="endDate" class="form-control">
-                    <option selected>2018</option>
-                    <option>2019</option>
-                    <option>2020</option>
-                    <option>2021</option>
-                    <option>2022</option>
-                </select>
+        <form th:if="${answers != null}" th:action="@{/submitDetailInfor}" th:method="post">
+            <div class="form-row" th:if="${map != null}">
+                <div class="form-group col-md-4" th:each="mapEntry : ${map}">
+                    <label for="endDate" th:text="${mapEntry.key.cauHoi}"></label>
+                    <select id="endDate" class="form-control" th:name="${mapEntry.key}">
+                        <option selected>Chọn</option>
+                        <option th:each="ans : ${mapEntry.value}" th:text="${ans.cauTraLoi}"
+                                th:value="${ans.cauTraLoi}"></option>
+                    </select>
+                </div>
             </div>
-        </div>
 
-        <button class="btn btn-primary">submit</button>
+            <button class="btn btn-primary">submit</button>
+        </form>
     </form>
 </div>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

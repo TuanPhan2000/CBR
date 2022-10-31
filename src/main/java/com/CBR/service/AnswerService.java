@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 public interface AnswerService {
+    Answer findAnswerByCauTraLoi(String answer);
 
     List<Answer> findAnswersByQuestion(int idQuestion);
 

@@ -1,5 +1,6 @@
 package com.CBR.service;
 
+import com.CBR.enity.Case;
 import com.CBR.model.*;
 
 import java.util.List;
@@ -14,5 +15,6 @@ public interface CaseService {
     List<PhanhForm> getAllCasePhanh();
 
     void setAttributeCaseInputGeneral(String hangXe, String tenXe, String doiXe, String loiGapPhai);
+    Case findCaseById(int id);
 
 }

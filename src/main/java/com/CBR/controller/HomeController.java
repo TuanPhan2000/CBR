@@ -3,17 +3,17 @@ package com.CBR.controller;
 import com.CBR.constain.StaticVariable;
 import com.CBR.enity.Answer;
 import com.CBR.enity.Question;
+import com.CBR.model.Form;
 import com.CBR.service.serviceImpl.AnswerServiceImpl;
 import com.CBR.service.serviceImpl.CaseServiceImpl;
 import com.CBR.service.serviceImpl.QuestionServiceImpl;
+import com.CBR.service.serviceImpl.SolutionServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.web.servlet.mvc.support.RedirectAttributesModelMap;
 
 import java.util.List;
 import java.util.Map;
@@ -29,6 +29,9 @@ public class HomeController {
 
     @Autowired
     QuestionServiceImpl questionServiceImpl;
+
+    @Autowired
+    SolutionServiceImpl solutionServiceImpl;
     @GetMapping("/")
     public String homePage(Model model){
         model.addAttribute("answers", answerServiceImpl.findAnswerByTrongSo(6));
@@ -36,15 +39,21 @@ public class HomeController {
     }
 
     @PostMapping("/submitGeneralInfor")
-    public String getPageDetail(Model model, RedirectAttributesModelMap redirectAttributes,
+    public String getPageDetail(Model model,
                                 @RequestParam("hangXe") String hangXe,
                                 @RequestParam("tenXe") String tenXe,
                                 @RequestParam("doiXe") String doiXe,
                                 @RequestParam("loiGapPhai") String loiGapPhai){
+
+        String heThong = answerServiceImpl.findHeThongByCauTraLoi(loiGapPhai);
+        if(heThong.equals("Khí thải") || heThong.equals("Truyền lực")){
+            System.out.println(solutionServiceImpl.findSolutionTruyenLucOrKhiThai(StaticVariable.form, "Truyền lực"));
+        }
+
         caseServiceImpl.setAttributeCaseInputGeneral(hangXe, tenXe, doiXe, loiGapPhai);
         Map<Question, List<Answer>> map = answerServiceImpl.findQuestionDetailAndAnswer(answerServiceImpl.findHeThongByCauTraLoi(loiGapPhai));
-        redirectAttributes.addAttribute("map", map);
-        return "redirect:/";
+        model.addAttribute("map", map);
+        return "index";
     }
 
 }
