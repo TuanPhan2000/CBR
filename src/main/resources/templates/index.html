@@ -19,13 +19,13 @@
             </div>
             <div class="form-group col-md-6">
                 <label for="tenXe">Tên xe</label>
-                <input type="password" class="form-control" id="tenXe" placeholder="Tên xe" th:name="tenXe">
+                <input type="text" class="form-control" id="tenXe" placeholder="Tên xe" th:name="tenXe">
             </div>
         </div>
         <div class="form-row" th:if="${answers != null}">
             <div class="form-group col-md-6">
                 <label for="doiXe">Đời xe</label>
-                <input type="password" class="form-control" id="doiXe" placeholder="Đời xe" th:name="doiXe">
+                <input type="text" class="form-control" id="doiXe" placeholder="Đời xe" th:name="doiXe">
             </div>
             <div class="form-group col-md-6">
                 <label for="loiGapPhai">Lỗi gặp phải</label>
@@ -36,21 +36,36 @@
                 </select>
             </div>
         </div>
-        <form th:if="${answers != null}" th:action="@{/submitDetailInfor}" th:method="post">
-            <div class="form-row" th:if="${map != null}">
-                <div class="form-group col-md-4" th:each="mapEntry : ${map}">
-                    <label for="endDate" th:text="${mapEntry.key.cauHoi}"></label>
-                    <select id="endDate" class="form-control" th:name="${mapEntry.key}">
-                        <option selected>Chọn</option>
-                        <option th:each="ans : ${mapEntry.value}" th:text="${ans.cauTraLoi}"
-                                th:value="${ans.cauTraLoi}"></option>
-                    </select>
-                </div>
-            </div>
-
-            <button class="btn btn-primary">submit</button>
-        </form>
+        <button class="btn btn-primary">Submit</button>
     </form>
+    <form th:if="${map != null}" th:action="@{/submitDetailInfor/{heThong}(heThong=${mapEntry.value})}" th:method="post" th:each="mapEntry : ${map}">
+        <div class="form-row" th:if="${map != null}">
+            <div class="form-group col-md-4" th:each="mapEntry1 : ${mapEntry.key}">
+                <label for="endDate" th:text="${mapEntry1.key.cauHoi}"></label>
+                <select id="endDate" class="form-control" th:name="${mapEntry1.key.cauHoi}">
+                    <option selected>Chọn</option>
+                    <option th:each="ans : ${mapEntry1.value}" th:text="${ans.cauTraLoi}"
+                            th:value="${ans.cauTraLoi}"></option>
+                </select>
+            </div>
+        </div>
+
+        <button class="btn btn-primary">Submit</button>
+    </form>
+    <div class="form-row" th:if="${solution != null}">
+        <div class="form-group col-md-6">
+            <label for="nguyenNhan">Nguyên nhân</label>
+            <input type="text" class="form-control" id="nguyenNhan" th:value="${solution.nguyenNhan}" readonly>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="cachSuaChua">Cách sửa chữa</label>
+            <input type="text" class="form-control" id="cachSuaChua" th:value="${solution.cachSuaChua}" readonly>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="doChinhXac">Độ chính xác</label>
+            <input type="text" class="form-control" id="doChinhXac" th:value="${solution.doChinhXac} + ' %'" readonly>
+        </div>
+    </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"

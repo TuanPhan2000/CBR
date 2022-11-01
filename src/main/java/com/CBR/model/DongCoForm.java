@@ -12,4 +12,14 @@ public class DongCoForm extends Form{
     private String tiengDongLaTrongKhoangMay;
     private String mucXangCuaBauPhao;
 
+    public DongCoForm() {
+    }
+
+    public DongCoForm(String hangXe, String tenXe, String doiXe, String loiGapPhai, String tuoiThoAcquy, String tuoiThoBugi, String tiengDongLaTrongKhoangMay, String mucXangCuaBauPhao) {
+        super(hangXe, tenXe, doiXe, loiGapPhai);
+        this.tuoiThoAcquy = tuoiThoAcquy;
+        this.tuoiThoBugi = tuoiThoBugi;
+        this.tiengDongLaTrongKhoangMay = tiengDongLaTrongKhoangMay;
+        this.mucXangCuaBauPhao = mucXangCuaBauPhao;
+    }
 }

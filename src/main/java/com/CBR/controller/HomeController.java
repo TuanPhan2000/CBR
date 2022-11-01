@@ -3,7 +3,7 @@ package com.CBR.controller;
 import com.CBR.constain.StaticVariable;
 import com.CBR.enity.Answer;
 import com.CBR.enity.Question;
-import com.CBR.model.Form;
+import com.CBR.model.Solution;
 import com.CBR.service.serviceImpl.AnswerServiceImpl;
 import com.CBR.service.serviceImpl.CaseServiceImpl;
 import com.CBR.service.serviceImpl.QuestionServiceImpl;
@@ -44,16 +44,18 @@ public class HomeController {
                                 @RequestParam("tenXe") String tenXe,
                                 @RequestParam("doiXe") String doiXe,
                                 @RequestParam("loiGapPhai") String loiGapPhai){
+        caseServiceImpl.setAttributeCaseInputGeneral(hangXe, tenXe, doiXe, loiGapPhai);
 
         String heThong = answerServiceImpl.findHeThongByCauTraLoi(loiGapPhai);
         if(heThong.equals("Khí thải") || heThong.equals("Truyền lực")){
-            System.out.println(solutionServiceImpl.findSolutionTruyenLucOrKhiThai(StaticVariable.form, "Truyền lực"));
+            Solution solution = solutionServiceImpl.findSolutionTruyenLucOrKhiThai(StaticVariable.form, answerServiceImpl.findHeThongByCauTraLoi(loiGapPhai));
+            model.addAttribute("solution", solution);
+            return "index";
         }
-
-        caseServiceImpl.setAttributeCaseInputGeneral(hangXe, tenXe, doiXe, loiGapPhai);
-        Map<Question, List<Answer>> map = answerServiceImpl.findQuestionDetailAndAnswer(answerServiceImpl.findHeThongByCauTraLoi(loiGapPhai));
+        Map<Map<Question, List<Answer>>, String> map = answerServiceImpl.findQuestionDetailAndAnswer(answerServiceImpl.findHeThongByCauTraLoi(loiGapPhai));
         model.addAttribute("map", map);
         return "index";
     }
+
 
 }

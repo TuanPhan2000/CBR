@@ -52,22 +52,303 @@ public class SolutionServiceImpl implements SolutionService {
             }
 
         }
-        return null;
+        ChuyenDongForm f = listCase.get(viTri);
+
+        int[] listIdCase = new int[65];
+        for(int i = 0; i <= 64; i++ ){
+            listIdCase[i] = 0;
+        }
+        List<CaseDescription> caseDescriptionList1 = caseDescriptionServiceImpl.findCaseDescriptionsByIdAnswer(answerServiceImpl.findAnswerByCauTraLoi(f.getHangXe()).getId());
+        for(CaseDescription caseDescription : caseDescriptionList1){
+            listIdCase[caseDescription.getCase1().getId()]++;
+        }
+        List<CaseDescription> caseDescriptionList2 = caseDescriptionServiceImpl.findCaseDescriptionsByIdAnswer(answerServiceImpl.findAnswerByCauTraLoi(f.getTenXe()).getId());
+        for(CaseDescription caseDescription : caseDescriptionList2){
+            listIdCase[caseDescription.getCase1().getId()]++;
+        }
+        List<CaseDescription> caseDescriptionList3 = caseDescriptionServiceImpl.findCaseDescriptionsByIdAnswer(answerServiceImpl.findAnswerByCauTraLoi(f.getDoiXe()).getId());
+        for(CaseDescription caseDescription : caseDescriptionList3){
+            listIdCase[caseDescription.getCase1().getId()]++;
+        }
+        List<CaseDescription> caseDescriptionList4 = caseDescriptionServiceImpl.findCaseDescriptionsByIdAnswer(answerServiceImpl.findAnswerByCauTraLoi(f.getLoiGapPhai()).getId());
+        for(CaseDescription caseDescription : caseDescriptionList4){
+            listIdCase[caseDescription.getCase1().getId()]++;
+        }
+        List<CaseDescription> caseDescriptionList5 = caseDescriptionServiceImpl.findCaseDescriptionsByIdAnswer(answerServiceImpl.findAnswerByCauTraLoi(f.getTinhTrangLop()).getId());
+        for(CaseDescription caseDescription : caseDescriptionList5){
+            listIdCase[caseDescription.getCase1().getId()]++;
+        }
+        List<CaseDescription> caseDescriptionList6 = caseDescriptionServiceImpl.findCaseDescriptionsByIdAnswer(answerServiceImpl.findAnswerByCauTraLoi(f.getKhungXeKhiQuaDuongNhapNho()).getId());
+        for(CaseDescription caseDescription : caseDescriptionList6){
+            listIdCase[caseDescription.getCase1().getId()]++;
+        }
+        List<CaseDescription> caseDescriptionList7 = caseDescriptionServiceImpl.findCaseDescriptionsByIdAnswer(answerServiceImpl.findAnswerByCauTraLoi(f.getOToKhiDiDuongThang()).getId());
+        for(CaseDescription caseDescription : caseDescriptionList7){
+            listIdCase[caseDescription.getCase1().getId()]++;
+        }
+        int idCaseResult = 0;
+        int max = 0;
+        for(int i = 1; i <= 64; i++){
+            if(max < listIdCase[i]){
+                max = listIdCase[i];
+                idCaseResult = i;
+            }
+        }
+        Case c = caseServiceImpl.findCaseById(idCaseResult);
+        Solution s = new Solution();
+        s.setCachSuaChua(c.getSuaChua());
+        s.setNguyenNhan(c.getNguyenNhan());
+        s.setDoChinhXac(doTuongDongMax*100);
+        return s;
     }
 
     @Override
     public Solution findSolutionPhanh(PhanhForm phanhForm) {
-        return null;
+        List<PhanhForm> listCase = caseServiceImpl.getAllCasePhanh();
+        float doTuongDongMax = 0;
+        int viTri = 0;
+        for(int i = 0; i < listCase.size(); i++){
+            float doTuongDong = (soSanhThuocTinh(listCase.get(i).getHangXe(), phanhForm.getHangXe()) * answerServiceImpl.getTrongSoByAnswer(listCase.get(i).getHangXe()) +
+                    soSanhThuocTinh(listCase.get(i).getTenXe(), phanhForm.getTenXe()) * answerServiceImpl.getTrongSoByAnswer(listCase.get(i).getTenXe()) +
+                    soSanhThuocTinh(listCase.get(i).getDoiXe(), phanhForm.getDoiXe()) * answerServiceImpl.getTrongSoByAnswer(listCase.get(i).getDoiXe()) +
+                    soSanhThuocTinh(listCase.get(i).getLoiGapPhai(), phanhForm.getLoiGapPhai()) * answerServiceImpl.getTrongSoByAnswer(listCase.get(i).getLoiGapPhai()) +
+                    soSanhThuocTinh(listCase.get(i).getTuoiThoMaPhanh(), phanhForm.getTuoiThoMaPhanh()) * answerServiceImpl.getTrongSoByAnswer(listCase.get(i).getTuoiThoMaPhanh()) +
+                    soSanhThuocTinh(listCase.get(i).getXeBiCanKhiThaPhanh(), phanhForm.getXeBiCanKhiThaPhanh()) * answerServiceImpl.getTrongSoByAnswer(listCase.get(i).getXeBiCanKhiThaPhanh()) +
+                    soSanhThuocTinh(listCase.get(i).getMucDauPhanh(), phanhForm.getMucDauPhanh()) * answerServiceImpl.getTrongSoByAnswer(listCase.get(i).getMucDauPhanh())) /
+                    (float) (answerServiceImpl.getTrongSoByAnswer(listCase.get(i).getHangXe()) +
+                            answerServiceImpl.getTrongSoByAnswer(listCase.get(i).getTenXe()) +
+                            answerServiceImpl.getTrongSoByAnswer(listCase.get(i).getDoiXe()) +
+                            answerServiceImpl.getTrongSoByAnswer(listCase.get(i).getLoiGapPhai()) +
+                            answerServiceImpl.getTrongSoByAnswer(listCase.get(i).getTuoiThoMaPhanh()) +
+                            answerServiceImpl.getTrongSoByAnswer(listCase.get(i).getXeBiCanKhiThaPhanh()) +
+                            answerServiceImpl.getTrongSoByAnswer(listCase.get(i).getMucDauPhanh()));
+
+            if(doTuongDong > doTuongDongMax) {
+                doTuongDongMax = doTuongDong;
+                viTri = i;
+            }
+
+        }
+        PhanhForm f = listCase.get(viTri);
+
+        int[] listIdCase = new int[65];
+        for(int i = 0; i <= 64; i++ ){
+            listIdCase[i] = 0;
+        }
+        List<CaseDescription> caseDescriptionList1 = caseDescriptionServiceImpl.findCaseDescriptionsByIdAnswer(answerServiceImpl.findAnswerByCauTraLoi(f.getHangXe()).getId());
+        for(CaseDescription caseDescription : caseDescriptionList1){
+            listIdCase[caseDescription.getCase1().getId()]++;
+        }
+        List<CaseDescription> caseDescriptionList2 = caseDescriptionServiceImpl.findCaseDescriptionsByIdAnswer(answerServiceImpl.findAnswerByCauTraLoi(f.getTenXe()).getId());
+        for(CaseDescription caseDescription : caseDescriptionList2){
+            listIdCase[caseDescription.getCase1().getId()]++;
+        }
+        List<CaseDescription> caseDescriptionList3 = caseDescriptionServiceImpl.findCaseDescriptionsByIdAnswer(answerServiceImpl.findAnswerByCauTraLoi(f.getDoiXe()).getId());
+        for(CaseDescription caseDescription : caseDescriptionList3){
+            listIdCase[caseDescription.getCase1().getId()]++;
+        }
+        List<CaseDescription> caseDescriptionList4 = caseDescriptionServiceImpl.findCaseDescriptionsByIdAnswer(answerServiceImpl.findAnswerByCauTraLoi(f.getLoiGapPhai()).getId());
+        for(CaseDescription caseDescription : caseDescriptionList4){
+            listIdCase[caseDescription.getCase1().getId()]++;
+        }
+        List<CaseDescription> caseDescriptionList5 = caseDescriptionServiceImpl.findCaseDescriptionsByIdAnswer(answerServiceImpl.findAnswerByCauTraLoi(f.getTuoiThoMaPhanh()).getId());
+        for(CaseDescription caseDescription : caseDescriptionList5){
+            listIdCase[caseDescription.getCase1().getId()]++;
+        }
+        List<CaseDescription> caseDescriptionList6 = caseDescriptionServiceImpl.findCaseDescriptionsByIdAnswer(answerServiceImpl.findAnswerByCauTraLoi(f.getXeBiCanKhiThaPhanh()).getId());
+        for(CaseDescription caseDescription : caseDescriptionList6){
+            listIdCase[caseDescription.getCase1().getId()]++;
+        }
+        List<CaseDescription> caseDescriptionList7 = caseDescriptionServiceImpl.findCaseDescriptionsByIdAnswer(answerServiceImpl.findAnswerByCauTraLoi(f.getMucDauPhanh()).getId());
+        for(CaseDescription caseDescription : caseDescriptionList7){
+            listIdCase[caseDescription.getCase1().getId()]++;
+        }
+        int idCaseResult = 0;
+        int max = 0;
+        for(int i = 1; i <= 64; i++){
+            if(max < listIdCase[i]){
+                max = listIdCase[i];
+                idCaseResult = i;
+            }
+        }
+        Case c = caseServiceImpl.findCaseById(idCaseResult);
+        Solution s = new Solution();
+        s.setCachSuaChua(c.getSuaChua());
+        s.setNguyenNhan(c.getNguyenNhan());
+        s.setDoChinhXac(doTuongDongMax*100);
+        return s;
     }
 
     @Override
     public Solution findSolutionDongCo(DongCoForm dongCoForm) {
-        return null;
+        List<DongCoForm> listCase = caseServiceImpl.getAllCaseDongCo();
+        float doTuongDongMax = 0;
+        int viTri = 0;
+        for(int i = 0; i < listCase.size(); i++){
+            float doTuongDong = (soSanhThuocTinh(listCase.get(i).getHangXe(), dongCoForm.getHangXe()) * answerServiceImpl.getTrongSoByAnswer(listCase.get(i).getHangXe()) +
+                    soSanhThuocTinh(listCase.get(i).getTenXe(), dongCoForm.getTenXe()) * answerServiceImpl.getTrongSoByAnswer(listCase.get(i).getTenXe()) +
+                    soSanhThuocTinh(listCase.get(i).getDoiXe(), dongCoForm.getDoiXe()) * answerServiceImpl.getTrongSoByAnswer(listCase.get(i).getDoiXe()) +
+                    soSanhThuocTinh(listCase.get(i).getLoiGapPhai(), dongCoForm.getLoiGapPhai()) * answerServiceImpl.getTrongSoByAnswer(listCase.get(i).getLoiGapPhai()) +
+                    soSanhThuocTinh(listCase.get(i).getTuoiThoAcquy(), dongCoForm.getTuoiThoAcquy()) * answerServiceImpl.getTrongSoByAnswer(listCase.get(i).getTuoiThoAcquy()) +
+                    soSanhThuocTinh(listCase.get(i).getTuoiThoBugi(), dongCoForm.getTuoiThoBugi()) * answerServiceImpl.getTrongSoByAnswer(listCase.get(i).getTuoiThoBugi()) +
+                    soSanhThuocTinh(listCase.get(i).getTiengDongLaTrongKhoangMay(), dongCoForm.getTiengDongLaTrongKhoangMay()) * answerServiceImpl.getTrongSoByAnswer(listCase.get(i).getTiengDongLaTrongKhoangMay()) +
+                    soSanhThuocTinh(listCase.get(i).getMucXangCuaBauPhao(), dongCoForm.getMucXangCuaBauPhao()) * answerServiceImpl.getTrongSoByAnswer(listCase.get(i).getMucXangCuaBauPhao())) /
+                    (float) (answerServiceImpl.getTrongSoByAnswer(listCase.get(i).getHangXe()) +
+                            answerServiceImpl.getTrongSoByAnswer(listCase.get(i).getTenXe()) +
+                            answerServiceImpl.getTrongSoByAnswer(listCase.get(i).getDoiXe()) +
+                            answerServiceImpl.getTrongSoByAnswer(listCase.get(i).getLoiGapPhai()) +
+                            answerServiceImpl.getTrongSoByAnswer(listCase.get(i).getTuoiThoAcquy()) +
+                            answerServiceImpl.getTrongSoByAnswer(listCase.get(i).getTuoiThoBugi()) +
+                            answerServiceImpl.getTrongSoByAnswer(listCase.get(i).getTiengDongLaTrongKhoangMay()) +
+                            answerServiceImpl.getTrongSoByAnswer(listCase.get(i).getMucXangCuaBauPhao()));
+
+            if(doTuongDong > doTuongDongMax) {
+                doTuongDongMax = doTuongDong;
+                viTri = i;
+            }
+
+        }
+        DongCoForm f = listCase.get(viTri);
+
+        int[] listIdCase = new int[65];
+        for(int i = 0; i <= 64; i++ ){
+            listIdCase[i] = 0;
+        }
+        List<CaseDescription> caseDescriptionList1 = caseDescriptionServiceImpl.findCaseDescriptionsByIdAnswer(answerServiceImpl.findAnswerByCauTraLoi(f.getHangXe()).getId());
+        for(CaseDescription caseDescription : caseDescriptionList1){
+            listIdCase[caseDescription.getCase1().getId()]++;
+        }
+        List<CaseDescription> caseDescriptionList2 = caseDescriptionServiceImpl.findCaseDescriptionsByIdAnswer(answerServiceImpl.findAnswerByCauTraLoi(f.getTenXe()).getId());
+        for(CaseDescription caseDescription : caseDescriptionList2){
+            listIdCase[caseDescription.getCase1().getId()]++;
+        }
+        List<CaseDescription> caseDescriptionList3 = caseDescriptionServiceImpl.findCaseDescriptionsByIdAnswer(answerServiceImpl.findAnswerByCauTraLoi(f.getDoiXe()).getId());
+        for(CaseDescription caseDescription : caseDescriptionList3){
+            listIdCase[caseDescription.getCase1().getId()]++;
+        }
+        List<CaseDescription> caseDescriptionList4 = caseDescriptionServiceImpl.findCaseDescriptionsByIdAnswer(answerServiceImpl.findAnswerByCauTraLoi(f.getLoiGapPhai()).getId());
+        for(CaseDescription caseDescription : caseDescriptionList4){
+            listIdCase[caseDescription.getCase1().getId()]++;
+        }
+        List<CaseDescription> caseDescriptionList5 = caseDescriptionServiceImpl.findCaseDescriptionsByIdAnswer(answerServiceImpl.findAnswerByCauTraLoi(f.getTuoiThoAcquy()).getId());
+        for(CaseDescription caseDescription : caseDescriptionList5){
+            listIdCase[caseDescription.getCase1().getId()]++;
+        }
+        List<CaseDescription> caseDescriptionList6 = caseDescriptionServiceImpl.findCaseDescriptionsByIdAnswer(answerServiceImpl.findAnswerByCauTraLoi(f.getTuoiThoBugi()).getId());
+        for(CaseDescription caseDescription : caseDescriptionList6){
+            listIdCase[caseDescription.getCase1().getId()]++;
+        }
+        List<CaseDescription> caseDescriptionList7 = caseDescriptionServiceImpl.findCaseDescriptionsByIdAnswer(answerServiceImpl.findAnswerByCauTraLoi(f.getTiengDongLaTrongKhoangMay()).getId());
+        for(CaseDescription caseDescription : caseDescriptionList7){
+            listIdCase[caseDescription.getCase1().getId()]++;
+        }
+        List<CaseDescription> caseDescriptionList8 = caseDescriptionServiceImpl.findCaseDescriptionsByIdAnswer(answerServiceImpl.findAnswerByCauTraLoi(f.getMucXangCuaBauPhao()).getId());
+        for(CaseDescription caseDescription : caseDescriptionList8){
+            listIdCase[caseDescription.getCase1().getId()]++;
+        }
+        int idCaseResult = 0;
+        int max = 0;
+        for(int i = 1; i <= 64; i++){
+            if(max < listIdCase[i]){
+                max = listIdCase[i];
+                idCaseResult = i;
+            }
+        }
+        Case c = caseServiceImpl.findCaseById(idCaseResult);
+        Solution s = new Solution();
+        s.setCachSuaChua(c.getSuaChua());
+        s.setNguyenNhan(c.getNguyenNhan());
+        s.setDoChinhXac(doTuongDongMax*100);
+        return s;
     }
 
     @Override
     public Solution findSolutionDien(DienForm dienForm) {
-        return null;
+        List<DienForm> listCase = caseServiceImpl.getAllCaseDien();
+        float doTuongDongMax = 0;
+        int viTri = 0;
+        for(int i = 0; i < listCase.size(); i++){
+            float doTuongDong = (soSanhThuocTinh(listCase.get(i).getHangXe(), dienForm.getHangXe()) * answerServiceImpl.getTrongSoByAnswer(listCase.get(i).getHangXe()) +
+                    soSanhThuocTinh(listCase.get(i).getTenXe(), dienForm.getTenXe()) * answerServiceImpl.getTrongSoByAnswer(listCase.get(i).getTenXe()) +
+                    soSanhThuocTinh(listCase.get(i).getDoiXe(), dienForm.getDoiXe()) * answerServiceImpl.getTrongSoByAnswer(listCase.get(i).getDoiXe()) +
+                    soSanhThuocTinh(listCase.get(i).getLoiGapPhai(), dienForm.getLoiGapPhai()) * answerServiceImpl.getTrongSoByAnswer(listCase.get(i).getLoiGapPhai()) +
+                    soSanhThuocTinh(listCase.get(i).getTuoiThoAccquy(), dienForm.getTuoiThoAccquy()) * answerServiceImpl.getTrongSoByAnswer(listCase.get(i).getTuoiThoAccquy()) +
+                    soSanhThuocTinh(listCase.get(i).getTuoiThoMayPhatDien(), dienForm.getTuoiThoMayPhatDien()) * answerServiceImpl.getTrongSoByAnswer(listCase.get(i).getTuoiThoMayPhatDien()) +
+                    soSanhThuocTinh(listCase.get(i).getDenPhaOto(), dienForm.getDenPhaOto()) * answerServiceImpl.getTrongSoByAnswer(listCase.get(i).getDenPhaOto()) +
+                    soSanhThuocTinh(listCase.get(i).getOCamCapDienKhong(), dienForm.getOCamCapDienKhong()) * answerServiceImpl.getTrongSoByAnswer(listCase.get(i).getOCamCapDienKhong()) +
+                    soSanhThuocTinh(listCase.get(i).getTiengKeuLaLucDeCuaOto(), dienForm.getTiengKeuLaLucDeCuaOto()) * answerServiceImpl.getTrongSoByAnswer(listCase.get(i).getTiengKeuLaLucDeCuaOto())) /
+                    (float) (answerServiceImpl.getTrongSoByAnswer(listCase.get(i).getHangXe()) +
+                            answerServiceImpl.getTrongSoByAnswer(listCase.get(i).getTenXe()) +
+                            answerServiceImpl.getTrongSoByAnswer(listCase.get(i).getDoiXe()) +
+                            answerServiceImpl.getTrongSoByAnswer(listCase.get(i).getLoiGapPhai()) +
+                            answerServiceImpl.getTrongSoByAnswer(listCase.get(i).getTuoiThoAccquy()) +
+                            answerServiceImpl.getTrongSoByAnswer(listCase.get(i).getTuoiThoMayPhatDien()) +
+                            answerServiceImpl.getTrongSoByAnswer(listCase.get(i).getDenPhaOto()) +
+                            answerServiceImpl.getTrongSoByAnswer(listCase.get(i).getOCamCapDienKhong()) +
+                            answerServiceImpl.getTrongSoByAnswer(listCase.get(i).getTiengKeuLaLucDeCuaOto()) );
+
+            if(doTuongDong > doTuongDongMax) {
+                doTuongDongMax = doTuongDong;
+                viTri = i;
+            }
+
+        }
+        DienForm f = listCase.get(viTri);
+
+        int[] listIdCase = new int[65];
+        for(int i = 0; i <= 64; i++ ){
+            listIdCase[i] = 0;
+        }
+        List<CaseDescription> caseDescriptionList1 = caseDescriptionServiceImpl.findCaseDescriptionsByIdAnswer(answerServiceImpl.findAnswerByCauTraLoi(f.getHangXe()).getId());
+        for(CaseDescription caseDescription : caseDescriptionList1){
+            listIdCase[caseDescription.getCase1().getId()]++;
+        }
+        List<CaseDescription> caseDescriptionList2 = caseDescriptionServiceImpl.findCaseDescriptionsByIdAnswer(answerServiceImpl.findAnswerByCauTraLoi(f.getTenXe()).getId());
+        for(CaseDescription caseDescription : caseDescriptionList2){
+            listIdCase[caseDescription.getCase1().getId()]++;
+        }
+        List<CaseDescription> caseDescriptionList3 = caseDescriptionServiceImpl.findCaseDescriptionsByIdAnswer(answerServiceImpl.findAnswerByCauTraLoi(f.getDoiXe()).getId());
+        for(CaseDescription caseDescription : caseDescriptionList3){
+            listIdCase[caseDescription.getCase1().getId()]++;
+        }
+        List<CaseDescription> caseDescriptionList4 = caseDescriptionServiceImpl.findCaseDescriptionsByIdAnswer(answerServiceImpl.findAnswerByCauTraLoi(f.getLoiGapPhai()).getId());
+        for(CaseDescription caseDescription : caseDescriptionList4){
+            listIdCase[caseDescription.getCase1().getId()]++;
+        }
+        List<CaseDescription> caseDescriptionList5 = caseDescriptionServiceImpl.findCaseDescriptionsByIdAnswer(answerServiceImpl.findAnswerByCauTraLoi(f.getTuoiThoAccquy()).getId());
+        for(CaseDescription caseDescription : caseDescriptionList5){
+            listIdCase[caseDescription.getCase1().getId()]++;
+        }
+        List<CaseDescription> caseDescriptionList6 = caseDescriptionServiceImpl.findCaseDescriptionsByIdAnswer(answerServiceImpl.findAnswerByCauTraLoi(f.getTuoiThoMayPhatDien()).getId());
+        for(CaseDescription caseDescription : caseDescriptionList6){
+            listIdCase[caseDescription.getCase1().getId()]++;
+        }
+        List<CaseDescription> caseDescriptionList7 = caseDescriptionServiceImpl.findCaseDescriptionsByIdAnswer(answerServiceImpl.findAnswerByCauTraLoi(f.getDenPhaOto()).getId());
+        for(CaseDescription caseDescription : caseDescriptionList7){
+            listIdCase[caseDescription.getCase1().getId()]++;
+        }
+        List<CaseDescription> caseDescriptionList8 = caseDescriptionServiceImpl.findCaseDescriptionsByIdAnswer(answerServiceImpl.findAnswerByCauTraLoi(f.getOCamCapDienKhong()).getId());
+        for(CaseDescription caseDescription : caseDescriptionList8){
+            listIdCase[caseDescription.getCase1().getId()]++;
+        }
+        List<CaseDescription> caseDescriptionList9 = caseDescriptionServiceImpl.findCaseDescriptionsByIdAnswer(answerServiceImpl.findAnswerByCauTraLoi(f.getTiengKeuLaLucDeCuaOto()).getId());
+        for(CaseDescription caseDescription : caseDescriptionList9){
+            listIdCase[caseDescription.getCase1().getId()]++;
+        }
+        int idCaseResult = 0;
+        int max = 0;
+        for(int i = 1; i <= 64; i++){
+            if(max < listIdCase[i]){
+                max = listIdCase[i];
+                idCaseResult = i;
+            }
+        }
+        Case c = caseServiceImpl.findCaseById(idCaseResult);
+        Solution s = new Solution();
+        s.setCachSuaChua(c.getSuaChua());
+        s.setNguyenNhan(c.getNguyenNhan());
+        s.setDoChinhXac(doTuongDongMax*100);
+        return s;
     }
 
     @Override
@@ -107,15 +388,15 @@ public class SolutionServiceImpl implements SolutionService {
             listIdCase[caseDescription.getCase1().getId()]++;
         }
         List<CaseDescription> caseDescriptionList2 = caseDescriptionServiceImpl.findCaseDescriptionsByIdAnswer(answerServiceImpl.findAnswerByCauTraLoi(f.getTenXe()).getId());
-        for(CaseDescription caseDescription : caseDescriptionList1){
+        for(CaseDescription caseDescription : caseDescriptionList2){
             listIdCase[caseDescription.getCase1().getId()]++;
         }
         List<CaseDescription> caseDescriptionList3 = caseDescriptionServiceImpl.findCaseDescriptionsByIdAnswer(answerServiceImpl.findAnswerByCauTraLoi(f.getDoiXe()).getId());
-        for(CaseDescription caseDescription : caseDescriptionList1){
+        for(CaseDescription caseDescription : caseDescriptionList3){
             listIdCase[caseDescription.getCase1().getId()]++;
         }
         List<CaseDescription> caseDescriptionList4 = caseDescriptionServiceImpl.findCaseDescriptionsByIdAnswer(answerServiceImpl.findAnswerByCauTraLoi(f.getLoiGapPhai()).getId());
-        for(CaseDescription caseDescription : caseDescriptionList1){
+        for(CaseDescription caseDescription : caseDescriptionList4){
             listIdCase[caseDescription.getCase1().getId()]++;
         }
         int idCaseResult = 0;

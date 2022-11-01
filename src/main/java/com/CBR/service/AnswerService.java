@@ -16,5 +16,5 @@ public interface AnswerService {
     List<String> getListAnswerInCaseByHeThong(String heThong);
     int getTrongSoByAnswer(String ans);
     List<Answer> findAnswerByTrongSo(int trongSo);
-    Map<Question, List<Answer>> findQuestionDetailAndAnswer(String heThong);
+    Map<Map<Question, List<Answer>>, String> findQuestionDetailAndAnswer(String heThong);
 }

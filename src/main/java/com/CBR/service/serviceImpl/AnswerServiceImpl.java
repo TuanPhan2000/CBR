@@ -50,12 +50,29 @@ public class AnswerServiceImpl implements AnswerService {
     }
 
     @Override
-    public Map<Question, List<Answer>> findQuestionDetailAndAnswer(String heThong) {
-        Map<Question, List<Answer>> map = new HashMap<>();
+    public Map<Map<Question, List<Answer>>, String> findQuestionDetailAndAnswer(String heThong) {
+        Map<Map<Question, List<Answer>>, String> map = new HashMap<>();
+        Map<Question, List<Answer>> m = new HashMap<>();
         List<Question> listQuestion = questionServiceImpl.findQuestionsByTrongSoAndHeThong(5, heThong);
         for(Question question : listQuestion){
-            map.put(question, findAnswersByQuestion(question.getId()));
+            m.put(question, findAnswersByQuestion(question.getId()));
         }
+        String heThong1 = null;
+        switch (heThong) {
+            case "Phanh":
+                heThong1 = "phanh";
+                break;
+            case "Chuyển động":
+                heThong1 = "chuyenDong";
+                break;
+            case "Điện":
+                heThong1 = "dien";
+                break;
+            default:
+                heThong1 = "dongCo";
+                break;
+        }
+        map.put(m, heThong1);
         return map;
     }
 }

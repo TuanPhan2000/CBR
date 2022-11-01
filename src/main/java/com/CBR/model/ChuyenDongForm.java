@@ -10,6 +10,8 @@ public class ChuyenDongForm extends Form{
     private String khungXeKhiQuaDuongNhapNho;
     private String tinhTrangLop;
 
+    public ChuyenDongForm() {
+    }
 
     public ChuyenDongForm(String hangXe, String tenXe, String doiXe, String loiGapPhai, String oToKhiDiDuongThang, String khungXeKhiQuaDuongNhapNho, String tinhTrangLop) {
         super(hangXe, tenXe, doiXe, loiGapPhai);
