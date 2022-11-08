@@ -2,17 +2,18 @@ package com.CBR.service;
 
 import com.CBR.enity.Case;
 import com.CBR.model.*;
+import com.CBR.model.System;
 
 import java.util.List;
 
 public interface CaseService {
 
-    List<ChuyenDongForm> getAllCaseChuyenDong();
-    List<DienForm> getAllCaseDien();
-    List<DongCoForm> getAllCaseDongCo();
-    List<Form> getAllCaseKhiThai();
-    List<Form> getAllCaseTruyenLuc();
-    List<PhanhForm> getAllCasePhanh();
+    List<MotionSystem> getAllCaseChuyenDong();
+    List<PowerSystem> getAllCaseDien();
+    List<EngineSystem> getAllCaseDongCo();
+    List<System> getAllCaseKhiThai();
+    List<System> getAllCaseTruyenLuc();
+    List<BrakeSystem> getAllCasePhanh();
 
     void setAttributeCaseInputGeneral(String hangXe, String tenXe, String doiXe, String loiGapPhai);
     void setAttributeCaseSystemMotionInput(String oToKhiDiDuongPhang, String khungXeKhiQuaDuongNhapNho, String tinhTrangLop);

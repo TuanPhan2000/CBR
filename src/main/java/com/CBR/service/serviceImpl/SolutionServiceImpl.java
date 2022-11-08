@@ -3,6 +3,7 @@ package com.CBR.service.serviceImpl;
 import com.CBR.enity.Case;
 import com.CBR.enity.CaseDescription;
 import com.CBR.model.*;
+import com.CBR.model.System;
 import com.CBR.service.SolutionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,9 +26,9 @@ public class SolutionServiceImpl implements SolutionService {
     }
 
     @Override
-    public Solution findSolutionChuyenDong(ChuyenDongForm chuyenDongForm) {
+    public Solution findSolutionChuyenDong(MotionSystem chuyenDongForm) {
 
-        List<ChuyenDongForm> listCase = caseServiceImpl.getAllCaseChuyenDong();
+        List<MotionSystem> listCase = caseServiceImpl.getAllCaseChuyenDong();
         float doTuongDongMax = 0;
         int viTri = 0;
         for(int i = 0; i < listCase.size(); i++){
@@ -52,7 +53,7 @@ public class SolutionServiceImpl implements SolutionService {
             }
 
         }
-        ChuyenDongForm f = listCase.get(viTri);
+        MotionSystem f = listCase.get(viTri);
 
         int[] listIdCase = new int[65];
         for(int i = 0; i <= 64; i++ ){
@@ -103,8 +104,8 @@ public class SolutionServiceImpl implements SolutionService {
     }
 
     @Override
-    public Solution findSolutionPhanh(PhanhForm phanhForm) {
-        List<PhanhForm> listCase = caseServiceImpl.getAllCasePhanh();
+    public Solution findSolutionPhanh(BrakeSystem phanhForm) {
+        List<BrakeSystem> listCase = caseServiceImpl.getAllCasePhanh();
         float doTuongDongMax = 0;
         int viTri = 0;
         for(int i = 0; i < listCase.size(); i++){
@@ -129,7 +130,7 @@ public class SolutionServiceImpl implements SolutionService {
             }
 
         }
-        PhanhForm f = listCase.get(viTri);
+        BrakeSystem f = listCase.get(viTri);
 
         int[] listIdCase = new int[65];
         for(int i = 0; i <= 64; i++ ){
@@ -180,8 +181,8 @@ public class SolutionServiceImpl implements SolutionService {
     }
 
     @Override
-    public Solution findSolutionDongCo(DongCoForm dongCoForm) {
-        List<DongCoForm> listCase = caseServiceImpl.getAllCaseDongCo();
+    public Solution findSolutionDongCo(EngineSystem dongCoForm) {
+        List<EngineSystem> listCase = caseServiceImpl.getAllCaseDongCo();
         float doTuongDongMax = 0;
         int viTri = 0;
         for(int i = 0; i < listCase.size(); i++){
@@ -208,7 +209,7 @@ public class SolutionServiceImpl implements SolutionService {
             }
 
         }
-        DongCoForm f = listCase.get(viTri);
+        EngineSystem f = listCase.get(viTri);
 
         int[] listIdCase = new int[65];
         for(int i = 0; i <= 64; i++ ){
@@ -263,8 +264,8 @@ public class SolutionServiceImpl implements SolutionService {
     }
 
     @Override
-    public Solution findSolutionDien(DienForm dienForm) {
-        List<DienForm> listCase = caseServiceImpl.getAllCaseDien();
+    public Solution findSolutionDien(PowerSystem dienForm) {
+        List<PowerSystem> listCase = caseServiceImpl.getAllCaseDien();
         float doTuongDongMax = 0;
         int viTri = 0;
         for(int i = 0; i < listCase.size(); i++){
@@ -293,7 +294,7 @@ public class SolutionServiceImpl implements SolutionService {
             }
 
         }
-        DienForm f = listCase.get(viTri);
+        PowerSystem f = listCase.get(viTri);
 
         int[] listIdCase = new int[65];
         for(int i = 0; i <= 64; i++ ){
@@ -352,8 +353,8 @@ public class SolutionServiceImpl implements SolutionService {
     }
 
     @Override
-    public Solution findSolutionTruyenLucOrKhiThai(Form form, String heThong) {
-        List<Form> listCase = new ArrayList<>();
+    public Solution findSolutionTruyenLucOrKhiThai(System system, String heThong) {
+        List<System> listCase = new ArrayList<>();
         if(heThong.equals("Truyền lực")){
             listCase = caseServiceImpl.getAllCaseTruyenLuc();
         }
@@ -363,10 +364,10 @@ public class SolutionServiceImpl implements SolutionService {
         float doTuongDongMax = 0;
         int viTri = 0;
         for(int i = 0; i < listCase.size(); i++){
-            float doTuongDong = (soSanhThuocTinh(listCase.get(i).getHangXe(), form.getHangXe()) * answerServiceImpl.getTrongSoByAnswer(listCase.get(i).getHangXe()) +
-                    soSanhThuocTinh(listCase.get(i).getTenXe(), form.getTenXe()) * answerServiceImpl.getTrongSoByAnswer(listCase.get(i).getTenXe()) +
-                    soSanhThuocTinh(listCase.get(i).getDoiXe(), form.getDoiXe()) * answerServiceImpl.getTrongSoByAnswer(listCase.get(i).getDoiXe()) +
-                    soSanhThuocTinh(listCase.get(i).getLoiGapPhai(), form.getLoiGapPhai()) * answerServiceImpl.getTrongSoByAnswer(listCase.get(i).getLoiGapPhai())/
+            float doTuongDong = (soSanhThuocTinh(listCase.get(i).getHangXe(), system.getHangXe()) * answerServiceImpl.getTrongSoByAnswer(listCase.get(i).getHangXe()) +
+                    soSanhThuocTinh(listCase.get(i).getTenXe(), system.getTenXe()) * answerServiceImpl.getTrongSoByAnswer(listCase.get(i).getTenXe()) +
+                    soSanhThuocTinh(listCase.get(i).getDoiXe(), system.getDoiXe()) * answerServiceImpl.getTrongSoByAnswer(listCase.get(i).getDoiXe()) +
+                    soSanhThuocTinh(listCase.get(i).getLoiGapPhai(), system.getLoiGapPhai()) * answerServiceImpl.getTrongSoByAnswer(listCase.get(i).getLoiGapPhai())/
                     (float) (answerServiceImpl.getTrongSoByAnswer(listCase.get(i).getHangXe()) +
                             answerServiceImpl.getTrongSoByAnswer(listCase.get(i).getTenXe()) +
                             answerServiceImpl.getTrongSoByAnswer(listCase.get(i).getDoiXe()) +
@@ -378,7 +379,7 @@ public class SolutionServiceImpl implements SolutionService {
             }
 
         }
-        Form f = listCase.get(viTri);
+        System f = listCase.get(viTri);
         int[] listIdCase = new int[65];
         for(int i = 0; i <= 64; i++ ){
             listIdCase[i] = 0;

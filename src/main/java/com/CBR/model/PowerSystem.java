@@ -5,7 +5,7 @@ import lombok.*;
 @Getter
 @Setter
 @ToString
-public class DienForm extends Form{
+public class PowerSystem extends System {
 
     private String tuoiThoAccquy;
     private String tuoiThoMayPhatDien;
@@ -13,10 +13,10 @@ public class DienForm extends Form{
     private String oCamCapDienKhong;
     private String tiengKeuLaLucDeCuaOto;
 
-    public DienForm() {
+    public PowerSystem() {
     }
 
-    public DienForm(String hangXe, String tenXe, String doiXe, String loiGapPhai, String tuoiThoAccquy, String tuoiThoMayPhatDien, String denPhaOto, String oCamCapDienKhong, String tiengKeuLaLucDeCuaOto) {
+    public PowerSystem(String hangXe, String tenXe, String doiXe, String loiGapPhai, String tuoiThoAccquy, String tuoiThoMayPhatDien, String denPhaOto, String oCamCapDienKhong, String tiengKeuLaLucDeCuaOto) {
         super(hangXe, tenXe, doiXe, loiGapPhai);
         this.tuoiThoAccquy = tuoiThoAccquy;
         this.tuoiThoMayPhatDien = tuoiThoMayPhatDien;

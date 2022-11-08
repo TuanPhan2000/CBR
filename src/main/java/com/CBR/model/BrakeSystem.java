@@ -4,15 +4,15 @@ import lombok.*;
 
 @Getter
 @Setter
-public class PhanhForm extends Form{
+public class BrakeSystem extends System {
 
     private String tuoiThoMaPhanh;
     private String xeBiCanKhiThaPhanh;
 
-    public PhanhForm() {
+    public BrakeSystem() {
     }
 
-    public PhanhForm(String hangXe, String tenXe, String doiXe, String loiGapPhai, String tuoiThoMaPhanh, String xeBiCanKhiThaPhanh, String mucDauPhanh) {
+    public BrakeSystem(String hangXe, String tenXe, String doiXe, String loiGapPhai, String tuoiThoMaPhanh, String xeBiCanKhiThaPhanh, String mucDauPhanh) {
         super(hangXe, tenXe, doiXe, loiGapPhai);
         this.tuoiThoMaPhanh = tuoiThoMaPhanh;
         this.xeBiCanKhiThaPhanh = xeBiCanKhiThaPhanh;

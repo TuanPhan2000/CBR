@@ -4,16 +4,16 @@ import lombok.*;
 
 @Getter
 @Setter
-public class Form {
+public class System {
 
     private String hangXe;
     private String tenXe;
     private String doiXe;
     private String loiGapPhai;
-    public Form() {
+    public System() {
     }
 
-    public Form(String hangXe, String tenXe, String doiXe, String loiGapPhai) {
+    public System(String hangXe, String tenXe, String doiXe, String loiGapPhai) {
         this.hangXe = hangXe;
         this.tenXe = tenXe;
         this.doiXe = doiXe;

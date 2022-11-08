@@ -2,13 +2,10 @@ package com.CBR.controller;
 
 
 import com.CBR.constain.StaticVariable;
-import com.CBR.model.ChuyenDongForm;
 import com.CBR.model.Solution;
 import com.CBR.service.serviceImpl.CaseServiceImpl;
 import com.CBR.service.serviceImpl.SolutionServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;

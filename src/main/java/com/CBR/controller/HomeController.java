@@ -43,12 +43,21 @@ public class HomeController {
                                 @RequestParam("hangXe") String hangXe,
                                 @RequestParam("tenXe") String tenXe,
                                 @RequestParam("doiXe") String doiXe,
-                                @RequestParam("loiGapPhai") String loiGapPhai){
+                                @RequestParam("loiGapPhai") String loiGapPhai,
+                                @RequestParam("khac") String khac){
+
+        if(!khac.equals("")){
+            model.addAttribute("noted", "Hệ thống đã tiếp nhận và sẽ xử lý sơm nhất");
+            return "index";
+        }
+        if(loiGapPhai.equals("")){
+            return "redirect:/";
+        }
         caseServiceImpl.setAttributeCaseInputGeneral(hangXe, tenXe, doiXe, loiGapPhai);
 
         String heThong = answerServiceImpl.findHeThongByCauTraLoi(loiGapPhai);
         if(heThong.equals("Khí thải") || heThong.equals("Truyền lực")){
-            Solution solution = solutionServiceImpl.findSolutionTruyenLucOrKhiThai(StaticVariable.form, answerServiceImpl.findHeThongByCauTraLoi(loiGapPhai));
+            Solution solution = solutionServiceImpl.findSolutionTruyenLucOrKhiThai(StaticVariable.system, answerServiceImpl.findHeThongByCauTraLoi(loiGapPhai));
             model.addAttribute("solution", solution);
             return "index";
         }

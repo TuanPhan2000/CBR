@@ -4,16 +4,16 @@ import lombok.*;
 
 @Getter
 @Setter
-public class ChuyenDongForm extends Form{
+public class MotionSystem extends System {
 
     private String oToKhiDiDuongThang;
     private String khungXeKhiQuaDuongNhapNho;
     private String tinhTrangLop;
 
-    public ChuyenDongForm() {
+    public MotionSystem() {
     }
 
-    public ChuyenDongForm(String hangXe, String tenXe, String doiXe, String loiGapPhai, String oToKhiDiDuongThang, String khungXeKhiQuaDuongNhapNho, String tinhTrangLop) {
+    public MotionSystem(String hangXe, String tenXe, String doiXe, String loiGapPhai, String oToKhiDiDuongThang, String khungXeKhiQuaDuongNhapNho, String tinhTrangLop) {
         super(hangXe, tenXe, doiXe, loiGapPhai);
         this.oToKhiDiDuongThang = oToKhiDiDuongThang;
         this.khungXeKhiQuaDuongNhapNho = khungXeKhiQuaDuongNhapNho;

@@ -1,13 +1,14 @@
 package com.CBR.constain;
 
 import com.CBR.model.*;
+import com.CBR.model.System;
 
 public class StaticVariable {
 
-    public static Form form = new Form();
-    public static PhanhForm phanhForm = new PhanhForm();
-    public static ChuyenDongForm chuyenDongForm = new ChuyenDongForm();
-    public static DienForm dienForm = new DienForm();
-    public static DongCoForm dongCoForm = new DongCoForm();
+    public static System system = new System();
+    public static BrakeSystem phanhForm = new BrakeSystem();
+    public static MotionSystem chuyenDongForm = new MotionSystem();
+    public static PowerSystem dienForm = new PowerSystem();
+    public static EngineSystem dongCoForm = new EngineSystem();
 
 }
