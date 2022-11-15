@@ -2,12 +2,10 @@ package com.CBR.controller;
 
 import com.CBR.constain.StaticVariable;
 import com.CBR.enity.Answer;
+import com.CBR.enity.Log;
 import com.CBR.enity.Question;
 import com.CBR.model.Solution;
-import com.CBR.service.serviceImpl.AnswerServiceImpl;
-import com.CBR.service.serviceImpl.CaseServiceImpl;
-import com.CBR.service.serviceImpl.QuestionServiceImpl;
-import com.CBR.service.serviceImpl.SolutionServiceImpl;
+import com.CBR.service.serviceImpl.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
@@ -32,6 +31,8 @@ public class HomeController {
 
     @Autowired
     SolutionServiceImpl solutionServiceImpl;
+    @Autowired
+    LogServiceImpl logServiceImpl;
     @GetMapping("/")
     public String homePage(Model model){
         model.addAttribute("answers", answerServiceImpl.findAnswerByTrongSo(6));
@@ -47,7 +48,15 @@ public class HomeController {
                                 @RequestParam("khac") String khac){
 
         if(!khac.equals("")){
-            model.addAttribute("noted", "Hệ thống đã tiếp nhận và sẽ xử lý sơm nhất");
+            Log log = new Log();
+            log.setMota(khac);
+            log.setThoigian(LocalDate.now());
+            String noted = "";
+            if(logServiceImpl.saveLog(log)){
+                noted = "Hệ thống đã tiếp nhận và sẽ xử lý sơm nhất";
+            }
+            else noted = "Xử lý thất bại";
+            model.addAttribute("noted", noted);
             return "index";
         }
         if(loiGapPhai.equals("")){
