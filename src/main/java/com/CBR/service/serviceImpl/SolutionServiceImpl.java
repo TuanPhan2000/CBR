@@ -364,10 +364,10 @@ public class SolutionServiceImpl implements SolutionService {
         float doTuongDongMax = 0;
         int viTri = 0;
         for(int i = 0; i < listCase.size(); i++){
-            float doTuongDong = (soSanhThuocTinh(listCase.get(i).getHangXe(), system.getHangXe()) * answerServiceImpl.getTrongSoByAnswer(listCase.get(i).getHangXe()) +
+            float doTuongDong = ((soSanhThuocTinh(listCase.get(i).getHangXe(), system.getHangXe()) * answerServiceImpl.getTrongSoByAnswer(listCase.get(i).getHangXe()) +
                     soSanhThuocTinh(listCase.get(i).getTenXe(), system.getTenXe()) * answerServiceImpl.getTrongSoByAnswer(listCase.get(i).getTenXe()) +
                     soSanhThuocTinh(listCase.get(i).getDoiXe(), system.getDoiXe()) * answerServiceImpl.getTrongSoByAnswer(listCase.get(i).getDoiXe()) +
-                    soSanhThuocTinh(listCase.get(i).getLoiGapPhai(), system.getLoiGapPhai()) * answerServiceImpl.getTrongSoByAnswer(listCase.get(i).getLoiGapPhai())/
+                    soSanhThuocTinh(listCase.get(i).getLoiGapPhai(), system.getLoiGapPhai()) * answerServiceImpl.getTrongSoByAnswer(listCase.get(i).getLoiGapPhai()))/
                     (float) (answerServiceImpl.getTrongSoByAnswer(listCase.get(i).getHangXe()) +
                             answerServiceImpl.getTrongSoByAnswer(listCase.get(i).getTenXe()) +
                             answerServiceImpl.getTrongSoByAnswer(listCase.get(i).getDoiXe()) +
